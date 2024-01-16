@@ -1,0 +1,23 @@
+.background{
+    background-color:black;
+    font-family:微軟正黑體;
+    color:white;
+    text-align:center
+}
+.first{
+    width:500px;
+    font-size:300%;
+    background-color:#0000CC;
+    text-align:center;
+    color:#FFFF26;
+    font-weight:bold;
+    margin:10px auto}
+
+.title{
+    background-color:#0000CC;
+    text-align:center;font-size:150%;
+    font-weight:bold}
+.paragraph{
+    word-break: normal;
+    width:1000px;
+    margin:0px auto}
