@@ -5,15 +5,14 @@
 .leftwebhead{
     font-size:20px;
     flex:none;
-    width:300px;
     font-weight:bold;  
 }
 
 .web-menu{
     display:flex;
+    flex:auto;
     justify-content: flex-end;
     font-size:20px;
-    flex:auto;
 }       
 .item{
     font-size:20px;
@@ -43,7 +42,19 @@
     margin: 0 auto;
 
 }
-
+.list-1{
+    display: none;
+    
+}
+.list-2{
+    display: flex;
+    flex:auto;
+    justify-content:center;
+    align-items:center;
+    width: 100%; 
+    max-width: 1200px;
+    margin: 0 auto;
+}
 .welcome{
     display:flex;
     justify-content:center;
@@ -59,7 +70,7 @@
 .promotion{
     display:flex;
     flex:1;
-    margin:20px;
+    margin:10px;
     background-color: lightblue;
     align-items: center; 
     height:50px;
@@ -69,8 +80,8 @@
     justify-content:center;
     background-color: black;
     color:red;
-    flex:386;
-    margin:20px;
+    flex:380px;
+    margin:10px;
     height:250px;
     background-image:url("https://images.saymedia-content.com/.image/t_share/MTc0MDcyMTY0MDU4NjcwNjU4/german-shepherd-height-and-weight.jpg") ;  
     background-repeat: no-repeat;
@@ -82,8 +93,8 @@
     justify-content:center;
     background-color: black;
     color:red;
-    flex:171;
-    margin:20px;
+    width:180px;
+    margin:10px;
     height:250px;
     background-image:url("https://images.saymedia-content.com/.image/t_share/MTc0MDcyMTY0MDU4NjcwNjU4/german-shepherd-height-and-weight.jpg");  
     background-repeat: no-repeat;
@@ -96,8 +107,8 @@
     justify-content:center;
     background-color: black;
     color:red;
-    flex:171;
-    margin:20px;
+    width:180px;
+    margin:10px;
     height:250px;
     background-image:url("https://images.saymedia-content.com/.image/t_share/MTc0MDcyMTY0MDU4NjcwNjU4/german-shepherd-height-and-weight.jpg");  
     background-repeat: no-repeat;
@@ -123,10 +134,7 @@
 .moblie{
     display:none;
 }
-.list-1{
-    display: none;
-    
-}
+
 img{
     float: right;
 }
@@ -137,7 +145,11 @@ img{
     left:50%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     background-color: white;
-  }
+}
+body{
+    margin: 0;
+    padding: 0;
+}
 @media(max-width:1250px){
     .list{
         flex-wrap:wrap;
@@ -174,6 +186,9 @@ img{
         width: 100%; 
         max-width: 1200px;
         margin: 0 auto;
+    }
+    .list-2{
+        display:none;
     }
     .side1{
         display:none;
@@ -212,4 +227,16 @@ img{
         display:block;
     }
     
+}
+@media(max-width:400px){
+    .text{
+        font-size: 30px;
+    }
+    
+}
+
+@media(max-width:360px){
+    .text{
+        font-size: 30px;
+    }
 }
