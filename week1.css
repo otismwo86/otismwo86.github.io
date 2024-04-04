@@ -24,6 +24,7 @@
 }
 .item1{
     display:flex;
+    justify-content:center;
     font-size:15px;
     flex:auto;
     margin:0 auto;
