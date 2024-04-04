@@ -4,8 +4,9 @@
 
 .leftwebhead{
     font-size:20px;
-    flex:none;
-    font-weight:bold;  
+    flex:auto;
+    font-weight:bold;
+    justify-content: center；
 }
 
 .web-menu{
