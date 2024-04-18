@@ -178,7 +178,7 @@
                             let address=pro.filelist;
                             let img1=address.replace(/jpg.*$/i, "jpg");
                             let promotionelements=document.querySelectorAll('.background1');
-                                for (let j=0;j<promotionelements.length;j++){
+                                for (let j=0;j<promotionelements.length; j++){
                                     let promotionelement=promotionelements[j];
                                     let existingp=promotionelement.querySelector('p');
                                     if (!existingp){
@@ -195,7 +195,7 @@
                             let address=pro.filelist;
                             let img1=address.replace(/jpg.*$/i, "jpg");
                             let promotionelements=document.querySelectorAll('.title2');
-                            for (let j=0;j<promotionelements.length;j++) {
+                            for (let j=0;j<promotionelements.length; j++) {
                                 let promotionelement=promotionelements[j];
                                 if (!promotionelement.style.backgroundImage) {
                                     promotionelement.style.backgroundImage=`url('${img1}')`;
@@ -221,7 +221,7 @@
                             let pro=test[i]; 
                             let title1=pro.stitle;
                             let promotionelements=document.querySelectorAll('.background2');
-                                for (let j=0;j<promotionelements.length;j++){
+                                for (let j=0;j<promotionelements.length; j++){
                                     let promotionelement=promotionelements[j];
                                     let existingp=promotionelement.querySelector('p');
                                     if (!existingp){
@@ -238,7 +238,7 @@
                             let img1=address.replace(/jpg.*$/i, "jpg");
                             let title1=pro.stitle;
                             let promotionelements=document.querySelectorAll('.promotion');
-                                for (let j=0;j<promotionelements.length;j++){
+                                for (let j=0;j<promotionelements.length; j++){
                                     let promotionelement=promotionelements[j];
                                     let existingImg=promotionelement.querySelector('img');
                                     let existingp=promotionelement.querySelector('p');
@@ -270,6 +270,9 @@
                     }
                     
                 })
+    </script>
+    </body>
+</html>
     </script>
     </body>
 </html>
