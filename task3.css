@@ -147,7 +147,10 @@
     justify-content:center;
     align-items:center; 
     background-color:rgba(204, 203, 29, 0.5);
-    padding:30px;
+    padding-top: 30px;
+    padding-right: 80px;
+    padding-bottom: 30px;
+    padding-left: 80px;
     margin-top:167px;
     
 }
