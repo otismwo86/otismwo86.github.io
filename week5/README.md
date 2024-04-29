@@ -1,9 +1,10 @@
 # task2
-## task2-1
+1. task2-1
 ``` mysql
 create database website;
 use website;
-## task-2
+
+2. task2-2
 ``` mysql
 create table member(
 	id bigint primary key auto_increment,
