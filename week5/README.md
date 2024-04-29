@@ -1,6 +1,6 @@
 # task2
 ## task2-1
-、、、mysql
+``` mysql
 create database website;
 use website;
 
