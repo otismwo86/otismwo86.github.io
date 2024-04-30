@@ -50,9 +50,10 @@ select * from member order by time desc limit 3 offset 1;
 
 5.task3-5
 ``` mysql
-select * from member where name='test';
+select * from member where username='test';
 ```
-![task3-5](https://github.com/otismwo86/otismwo86.github.io/assets/156811348/429a082b-9fc4-4ed8-9b3e-ac85a987bd9e)
+![task3-5](https://github.com/otismwo86/otismwo86.github.io/assets/156811348/08d6c7d2-1f36-476c-982d-e72fb35ae377)
+
 
 6.task3-6
 ``` mysql
@@ -62,9 +63,10 @@ select * from member where name like '%es%';
 
 7.task3-7
 ``` mysql
-select * from member where name='test' and password='test';
+select * from member where username='test' and password='test';
 ```
-![task3-7](https://github.com/otismwo86/otismwo86.github.io/assets/156811348/71596de8-3605-46a4-a7c8-c323d9d9d1f9)
+![task3-7](https://github.com/otismwo86/otismwo86.github.io/assets/156811348/2a668174-2b47-4596-b0d7-d9491a76a3af)
+
 
 8.task3-8
 ``` mysql
