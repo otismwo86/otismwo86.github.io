@@ -50,16 +50,11 @@ async def sign_in(request: Request, username: str = Form(None), password: str = 
         db_connection=connect_to_db()
         try:
             cursor=db_connection.cursor()
-            query = "select name from member where username = %s"
+            query = "select name,id from member where username = %s"
             cursor.execute(query,(username,))
             result = cursor.fetchone()
             if result:
-                name = result[0]
-            id_query = "select id from member where username = %s"
-            cursor.execute(id_query,(username,))
-            id_result = cursor.fetchone()
-            if id_result:
-                member_id = id_result[0]
+                name, member_id = result
             request.session["id"] = member_id
             request.session["name"] = name
         finally:
