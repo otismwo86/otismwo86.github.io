@@ -47,6 +47,23 @@ async def sign_in(request: Request, username: str = Form(None), password: str = 
     if validate_user(username,password):
         request.session[SIGNED_IN] = True
         request.session["username"] = username
+        db_connection=connect_to_db()
+        try:
+            cursor=db_connection.cursor()
+            query = "select name from member where username = %s"
+            cursor.execute(query,(username,))
+            result = cursor.fetchone()
+            if result:
+                name = result[0]
+            id_query = "select id from member where username = %s"
+            cursor.execute(id_query,(username,))
+            id_result = cursor.fetchone()
+            if id_result:
+                member_id = id_result[0]
+            request.session["id"] = member_id
+            request.session["name"] = name
+        finally:
+            db_connection.close()
         return RedirectResponse(url="/member", status_code=303, headers={"username": username})
     else:
         return RedirectResponse(url="/error?message=Username or password is not correct", status_code=303)
@@ -55,17 +72,13 @@ async def sign_in(request: Request, username: str = Form(None), password: str = 
 @app.get("/member", response_class=HTMLResponse)
 async def member(request: Request):
     username = request.session.get("username")
+    name = request.session.get("name")
     token = request.session.get(SIGNED_IN)
     if not token:
         return RedirectResponse(url="/")
     db_connection=connect_to_db()
     try:
         cursor=db_connection.cursor()
-        query = "select name from member where username = %s"
-        cursor.execute(query,(username,))
-        result = cursor.fetchone()
-        if result:
-            username = result[0]
         cursor.execute("select member.name,message.content,message.time from message join member on message.member_id = member.id order by time desc")
         data = cursor.fetchall()
         messages=[]
@@ -75,7 +88,7 @@ async def member(request: Request):
             messages.append((membername,messagecontent))
     finally:
         db_connection.close()
-    return templates.TemplateResponse("memberpage.html", {'request': request,'username': username, 'messages':messages})
+    return templates.TemplateResponse("memberpage.html", {'request': request,'username': username,'name' : name, 'messages':messages})
 
 @app.get("/error")
 async def error(request:Request, message: str):
@@ -117,20 +130,15 @@ async def register(request:Request, name: str = Form(None), username: str = Form
     
 @app.post("/createMessage")
 async def createMessage(request:Request, content: str = Form(None)):
-    username = request.session.get("username")
+    id = request.session.get("id")
     db_connection = connect_to_db()
     try:
         cursor = db_connection.cursor()
-        query = "select id from member where username = %s"
-        cursor.execute(query, (username,))
-        result = cursor.fetchone()
-        if result:
-            id = result[0]
-            insert_query= " insert into message (member_id, content) values (%s,%s)"
-            cursor.execute(insert_query,(id,content))
-            db_connection.commit()
-            cursor.close()
-            return RedirectResponse(url="/member", status_code=303)
+        insert_query= " insert into message (member_id, content) values (%s,%s)"
+        cursor.execute(insert_query,(id,content))
+        db_connection.commit()
+        cursor.close()
+        return RedirectResponse(url="/member", status_code=303)
     finally:
         db_connection.close()
 
