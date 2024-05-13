@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charset="utf-8"/>
+        <title>Welcome</title>
+        <link rel="stylesheet" type="text/css" href="week7/mainpage.css"/>
+    </head>
+    <body>
+        <form id="signin_form" action="http://127.0.0.1:8000/signup" method="post" onsubmit="return validateuser(signin_form)">
+            <div class="web_header">歡迎光臨，請註冊登入系統</div>
+            <div class="login_header">註冊</div>
+            <div class="username"><label>姓名</label><input id = "name" name="name" style = "margin-left: 10px;"></div>
+            <div class="username"><label>帳號</label><input id = "username" name="username" style = "margin-left: 10px;"></div>
+            <div class="password"><label>密碼</label><input id = "password" name="password" type = "password" style = "margin-left: 10px;"></div>
+            <div style="text-align: center;"><button type="submit">確認</button></div>
+        </form>
+        <hr>
+        <form id="login_form" action="http://127.0.0.1:8000/signin" method="post" onsubmit="return validatesignin(login_form)">
+            <div class="login_header">登入系統</div>
+            <div class="username">帳號<input id = "signin_username" name="username" style = "margin-left: 10px;"></div>
+            <div class="password">密碼<input id = "signin_password" name="password" type = "password" style = "margin-left: 10px;"></div>
+            <div style="text-align: center;"><button type="submit">登入</button></div>
+        </form>
+    <script>
+        function validateuser(){
+        let name = document.getElementById("name").value;
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        if (name == "" || username == "" || password == ""){
+            alert("請填寫所有欄位");
+            return false;
+        }
+        return true;
+        }
+        function validatesignin() {
+        let signin_username = document.getElementById("signin_username").value;
+        let signin_password = document.getElementById("signin_password").value;
+        if (signin_username == "" || signin_password == "") {
+            alert("請填寫所有欄位");
+            return false;
+        }
+        return true;
+    }
+    </script>
+    </body>
+</html>

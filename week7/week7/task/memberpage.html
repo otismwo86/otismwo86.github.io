@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charset="utf-8"/>
+        <title>Welcome</title>
+        <link rel="stylesheet" type="text/css" href="week7/member.css"/>
+    </head>
+    <body>
+            <div class="web_header">歡迎光臨，這是會員頁面</div>
+            <div class="login_header">{{ name }}，歡迎登入系統</div>
+            <div class="logout" onclick="redirectToSignOut(this)"><span class="hover"><u>登出系統</u></span></div>
+            <hr>
+            <div class="login_header">查詢會員姓名</div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <input id="usernameInput" style="margin-right: 10px;">
+                <button onclick="searchname()">查詢</button>
+                <div id="userData">
+                    
+                </div>
+            </div>
+            <hr>
+            
+            <div class="login_header">更新我的姓名</div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <input id="updatenameinput" style="margin-right: 10px;">
+                <button onclick="updatename()">更新</button>
+                <div id="nameupdate">
+                    
+                </div>
+            </div>
+            <hr>
+            <form action="http://127.0.0.1:8000/createMessage" method="post" onsubmit="return validateuser(login_form)">
+            <div class="login_header">快來留言吧</div>
+            <div style="text-align: center; margin-bottom: 20px;">內容<input id = "content" name="content"></div>
+            <div style="text-align: center;"><button type="submit">送出</button></div>
+            </form>
+            <hr>
+            <div style="text-align: center;">
+                {% for message in messages %}
+                <div class="message"><strong>{{ message[0] }}:</strong> {{ message[1] }}</div>
+                {% endfor %}
+            </div>
+    <script>
+        function redirectToSignOut(element) {
+            window.location.href = 'http://127.0.0.1:8000/signout';
+            element.classList.add('clicked'); 
+        }
+        function searchname(){
+            let username = document.getElementById("usernameInput").value;
+            let url = "http://127.0.0.1:8000/api/member?username=" + username;
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                let userDataContainer = document.getElementById("userData");
+                userDataContainer.innerHTML = "";
+                let name = document.createElement("p");
+                if (data.data === null || data.data === undefined || data.data.username === undefined){
+                    name.textContent = "No Data" + "  (" + username + ")";
+                    name.style.fontSize="20px";
+                    userDataContainer.appendChild(name);
+                } else{
+                name.textContent = data.data.name + "  (" + data.data.username + ")";
+                name.style.fontSize="20px";
+                userDataContainer.appendChild(name);
+                }
+            })
+            .catch(error => {
+            console.error('Error:', error);
+            });
+        }
+        function updatename(){
+            let name = document.getElementById("updatenameinput").value;
+            let nameupdatecontainer = document.getElementById("nameupdate")
+            nameupdatecontainer.innerHTML = "";
+            let url = "http://127.0.0.1:8000/api/member";
+            fetch(url, {
+                method:"PATCH",
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name: name }) 
+            })
+            .then(response => response.json())
+            .then(data => {
+                let nameupdater = document.createElement("p");
+                if (data.ok) {
+                    nameupdater.textContent = "更新成功";
+                    nameupdater.style,fontSize="20px";
+                    nameupdatecontainer.appendChild(nameupdater);
+                } else {
+                    nameupdater.textContent = "更新失敗";
+                    nameupdater.style,fontSize="20px";
+                    nameupdatecontainer.appendChild(nameupdater);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+    </body>
+</html>
