@@ -154,13 +154,15 @@ async def apimember(request:Request, username: str):
                 
             else:
                 field_names = [i[0] for i in cursor.description]
-                data_dict = {field_names[i]: val for i, val in enumerate(data[0])}
+                data_dict = {}
+                for i in range(len(field_names)):
+                    data_dict[field_names[i]] = data[0][i]
                 data = data_dict
         except:
             return JSONResponse(content={"data": None})
         finally:
             db_connection.close()
-        return JSONResponse(content={"data": data})
+        return JSONResponse(content={"data": data}) #調回前端
 
 @app.patch("/api/member")
 async def updatename(request:Request):
